@@ -1,0 +1,42 @@
+{
+  "name": "flexibble-api",
+  "version": "1.0.0",
+  "description": "Api page flexibble",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "nodemon ./src/app.ts",
+        "start": "node ./dist/app.js",
+        "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rexpeto/flexibble-api.git"
+  },
+  "keywords": [
+    "MongoDb",
+    "Express",
+    "Multer",
+    "JsonWebToken"
+  ],
+  "author": "Carlos Gallardo (Rexpeto)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rexpeto/flexibble-api/issues"
+  },
+  "homepage": "https://github.com/Rexpeto/flexibble-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.3.1",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.17",
+    "@types/mongoose": "^5.11.97",
+    "@types/multer": "^1.4.7"
+  }
+}
