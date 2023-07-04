@@ -8,6 +8,11 @@ const UserSchema = new Schema <UserInterface>({
     },
     email: {
         type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
         required: true
     },
     avatarUrl: {
