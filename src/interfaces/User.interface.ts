@@ -1,9 +1,9 @@
 import { ObjectId, SchemaDefinition, SchemaDefinitionProperty } from "mongoose";
-import ProjectInterface from "./Project.interface";
 
 interface UserInterface {
     name: string;
     email: string;
+    password: string;
     avatarUrl: string;
     description?: string;
     githubUrl?: string;
