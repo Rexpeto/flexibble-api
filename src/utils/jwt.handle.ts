@@ -1,4 +1,4 @@
-import { sign } from "jsonwebtoken";
+import { sign, verify } from "jsonwebtoken";
 
 /*
  * jwt secret of environment
@@ -21,4 +21,9 @@ export const signToken = (
     });
 
     return jwt;
+};
+
+export const verifyToken = (token: string) => {
+    const isOk = verify(token, JWT_SECRET);
+    return isOk;
 };
