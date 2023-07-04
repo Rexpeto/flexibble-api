@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import handleHttp from "../utils/error.handle";
-import { registerNewUser } from "../services/User.service";
+import { loginUser, registerNewUser } from "../services/User.service";
 
 /*
  * Login user
@@ -9,6 +9,13 @@ import { registerNewUser } from "../services/User.service";
 export const loginCtrl = async ({ body }: Request, res: Response) => {
     const { email, password } = body;
     try {
+        const response: any = await loginUser({ email, password });
+
+        if (response.msg) {
+            return res.status(401).json(response);
+        }
+
+        res.status(200).json(response);
     } catch (e) {
         handleHttp(res, "Oops! Ocurrio un error", e);
     }
