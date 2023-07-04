@@ -1,6 +1,7 @@
-import { ObjectId, SchemaDefinition, SchemaDefinitionProperty } from "mongoose";
+import { ObjectId, SchemaDefinitionProperty } from "mongoose";
 
 interface UserInterface {
+    _id?: string;
     name: string;
     email: string;
     password: string;
