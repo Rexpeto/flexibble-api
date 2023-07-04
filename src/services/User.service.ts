@@ -1,3 +1,4 @@
+import UserInterface from "../interfaces/User.interface";
 import { AuthRegister } from "../interfaces/authUser.interface";
 import User from "../models/User.model";
 import { encrypt } from "../utils/bcrypt.handle";
@@ -7,7 +8,7 @@ export const registerNewUser = async ({
     email,
     password
 }: AuthRegister) => {
-    const checkIs: any = await User.findOne({ email });
+    const checkIs: UserInterface | null = await User.findOne({ email });
 
     if (checkIs) {
         return { msg: "El usuario ya existe" };
