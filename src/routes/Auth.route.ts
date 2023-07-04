@@ -1,7 +1,7 @@
-import { Request, Response, Router } from "express";
+import { Router } from "express";
+import { loginCtrl, registerCtrl } from "../controllers/User.controller";
 
 export const router = Router();
 
-router.get("/", (req: Request, res: Response) => {
-    res.json({ msg: "Hola mundo" });
-});
+router.post("/login", loginCtrl);
+router.post("/register", registerCtrl);
