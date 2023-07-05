@@ -56,3 +56,39 @@ export const loginUser = async ({ email, password }: AuthLogin) => {
         return { msg: "El usuario o la contraseña es incorrecta" };
     }
 };
+
+export const updateUser = async (
+    _id: string,
+    { name, email, githubUrl, linkedinUrl }: UserInterface,
+    fileName: string
+) => {
+    try {
+        const user = await User.findOne({ _id });
+
+        const avatar = fileName === "undefined" ? user?.avatarUrl : fileName;
+        const nameUser = name === undefined ? user?.name : name.toLowerCase();
+        const emailUser =
+            email === undefined ? user?.email : email.toLowerCase();
+
+        const update = await User.findOneAndUpdate(
+            { _id },
+            {
+                name: nameUser,
+                email: emailUser,
+                avatarUrl: avatar,
+                githubUrl: githubUrl ?? user?.githubUrl,
+                linkedinUrl: linkedinUrl ?? user?.linkedinUrl
+            },
+            {
+                new: true
+            }
+        );
+
+        await update?.save();
+
+        return update;
+    } catch (e) {
+        console.log(e);
+        return { msg: "Oops! Ocurrio un error" };
+    }
+};
