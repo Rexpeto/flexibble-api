@@ -3,7 +3,7 @@ import { ObjectId, SchemaDefinitionProperty } from "mongoose";
 interface ProjectInterface {
     title: string;
     description: string;
-    image: string;
+    image?: string;
     liveSiteUrl?: string;
     githubUrl?: string;
     category: string;
