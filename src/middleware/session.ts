@@ -1,10 +1,6 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
 import { verifyToken } from "../utils/jwt.handle";
-import { JwtPayload } from "jsonwebtoken";
-
-interface ReqExt extends Request {
-    user?: JwtPayload | string;
-}
+import ReqExt from "../interfaces/ReqExt.interface";
 
 const sessionActive = (req: ReqExt, res: Response, next: NextFunction) => {
     try {
