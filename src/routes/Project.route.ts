@@ -3,7 +3,8 @@ import sessionActive from "../middleware/session";
 import {
     getProject,
     getProjects,
-    setProject
+    setProject,
+    updateProject
 } from "../controllers/Project.controller";
 import { uploadImgProject } from "../middleware/file";
 
@@ -16,4 +17,10 @@ router.post(
     sessionActive,
     uploadImgProject.single("image"),
     setProject
+);
+router.post(
+    "/update/:id",
+    sessionActive,
+    uploadImgProject.single("image"),
+    updateProject
 );
