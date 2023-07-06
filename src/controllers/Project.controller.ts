@@ -3,7 +3,8 @@ import handleHttp from "../utils/error.handle";
 import {
     createProject,
     getAllProjects,
-    getProjectId
+    getProjectId,
+    updateProjectId
 } from "../services/Project.service";
 import ProjectInterface from "../interfaces/Project.interface";
 import ReqExt from "../interfaces/ReqExt.interface";
@@ -91,7 +92,31 @@ export const setProject = async (req: ReqExt, res: Response) => {
  * Update project
  * @returns
  * */
-export const updateProject = (req: Request, res: Response) => {};
+export const updateProject = async (
+    { body, params, user }: ReqExt,
+    res: Response
+) => {
+    try {
+        const { id } = params;
+        const idUser = user?.id;
+
+        if (!id) {
+            return res
+                .status(403)
+                .json({ msg: "Debe colocar el proyecto a editar" });
+        }
+
+        const project: any = await updateProjectId(id, idUser, body);
+
+        if (project?.msg) {
+            return res.status(404).json(project);
+        }
+
+        res.status(200).json(project);
+    } catch (e) {
+        handleHttp(res, "Oops!! Ocurrio un error", e);
+    }
+};
 
 /*
  * Delete project
