@@ -17,7 +17,7 @@ const UserSchema = new Schema <UserInterface>({
     },
     avatarUrl: {
         type: String,
-        default: 'profile.png'
+        default: `${process.env.IP_PUBLIC_SERVER}${process.env.ROUTE_PROFILE}profile.png`
     },
     description: {
         type: String
