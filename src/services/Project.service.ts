@@ -82,8 +82,6 @@ export const updateProjectId = async (
             return { msg: "No se encontró el proyecto" };
         }
 
-        console.log(project);
-
         const { title, description, image, githubUrl, liveSiteUrl, category } =
             data;
 
