@@ -1,3 +1,4 @@
+import ProjectInterface from "../interfaces/Project.interface";
 import Project from "../models/Project.model";
 
 export const getAllProjects = async () => {
@@ -62,5 +63,53 @@ export const getProjectId = async (id: string) => {
         return project;
     } catch (e) {
         return { msg: "No existe el proyecto" };
+    }
+};
+
+export const updateProjectId = async (
+    _id: string,
+    idUser: string,
+    data: ProjectInterface
+) => {
+    try {
+        if (!_id) {
+            return { msg: "Debe indicar un proyecto" };
+        }
+
+        const project: any = Project.findOne({ _id, createBy: idUser });
+
+        if (!project?.title) {
+            return { msg: "No se encontró el proyecto" };
+        }
+
+        console.log(project);
+
+        const { title, description, image, githubUrl, liveSiteUrl, category } =
+            data;
+
+        const newTitle = title ? title : project?.title;
+        const newDescription = description ? description : project?.description;
+        const newImage = image === "undefined" || "" ? project?.image : image;
+        const newCategory = category ? category : project?.category;
+        const newGithub = githubUrl ? githubUrl : project?.githubUrl;
+        const newliveSiteUrl = liveSiteUrl ? liveSiteUrl : project?.liveSiteUrl;
+
+        const newProject = {
+            title: newTitle,
+            description: newDescription,
+            image: newImage,
+            category: newCategory,
+            githubUrl: newGithub,
+            liveSiteUrl: newliveSiteUrl
+        };
+
+        const update = await Project.updateOne(
+            { _id, createBy: idUser },
+            newProject
+        );
+
+        return update;
+    } catch (e) {
+        return { msg: "No se encontró el proyecto" };
     }
 };
