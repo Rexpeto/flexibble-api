@@ -50,3 +50,17 @@ export const createProject = async ({
         return { error: "Oops!! ocurrio un error" };
     }
 };
+
+export const getProjectId = async (id: string) => {
+    try {
+        const project = await Project.findById(id);
+
+        if (!project) {
+            return { msg: "El proyecto no existe" };
+        }
+
+        return project;
+    } catch (e) {
+        return { msg: "No existe el proyecto" };
+    }
+};
