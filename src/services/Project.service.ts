@@ -1,9 +1,7 @@
 import Project from "../models/Project.model";
 
 export const getAllProjects = async () => {
-    const projects = await Project.find();
-
-    console.log(projects);
+    const projects: any = await Project.find();
 
     return projects;
 };
