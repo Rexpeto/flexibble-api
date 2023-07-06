@@ -8,7 +8,13 @@ import ReqExt from "../interfaces/ReqExt.interface";
  * Search project by name
  * @returns
  * */
-export const getProject = async (req: Request, res: Response) => {
+export const getProject = async (req: Request, res: Response) => {};
+
+/*
+ * All projects
+ * @returns
+ * */
+export const getProjects = async (req: Request, res: Response) => {
     try {
         const response = await getAllProjects();
 
@@ -17,12 +23,6 @@ export const getProject = async (req: Request, res: Response) => {
         handleHttp(res, "Oops!! Ocurrio un error", e);
     }
 };
-
-/*
- * All projects
- * @returns
- * */
-export const getProjects = (req: Request, res: Response) => {};
 
 /*
  * Create project
