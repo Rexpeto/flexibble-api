@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 import handleHttp from "../utils/error.handle";
-import { createProject, getAllProjects } from "../services/Project.service";
+import {
+    createProject,
+    getAllProjects,
+    getProjectId
+} from "../services/Project.service";
 import ProjectInterface from "../interfaces/Project.interface";
 import ReqExt from "../interfaces/ReqExt.interface";
 
@@ -8,7 +12,21 @@ import ReqExt from "../interfaces/ReqExt.interface";
  * Search project by name
  * @returns
  * */
-export const getProject = async (req: Request, res: Response) => {};
+export const getProject = async ({ params }: Request, res: Response) => {
+    const { id } = params;
+
+    try {
+        const response: any = await getProjectId(id);
+
+        if (response.msg) {
+            return res.status(404).json(response);
+        }
+
+        res.status(200).json(response);
+    } catch (e) {
+        handleHttp(res, "Oops Ocurrio un error", e);
+    }
+};
 
 /*
  * All projects
