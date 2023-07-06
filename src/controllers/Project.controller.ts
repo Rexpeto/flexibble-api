@@ -16,6 +16,12 @@ export const getProject = async ({ params }: Request, res: Response) => {
     const { id } = params;
 
     try {
+        if (id.length < 24) {
+            return res
+                .status(404)
+                .json({ msg: "Debe enviar un proyecto válido" });
+        }
+
         const response: any = await getProjectId(id);
 
         if (response.msg) {
