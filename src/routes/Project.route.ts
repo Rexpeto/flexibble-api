@@ -10,7 +10,7 @@ import { uploadImgProject } from "../middleware/file";
 export const router = Router();
 
 router.get("/", getProjects);
-router.post("/:id", sessionActive, getProject);
+router.post("/search/:id", sessionActive, getProject);
 router.post(
     "/newProject",
     sessionActive,
