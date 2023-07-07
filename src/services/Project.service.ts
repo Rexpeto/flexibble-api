@@ -119,3 +119,19 @@ export const updateProjectId = async (
         return { msg: "No se encontró el proyecto" };
     }
 };
+
+export const deleteProjectId = async (_id: string, idUser: string) => {
+    try {
+        const isUser = await Project.findOne({ _id, createBy: idUser });
+
+        if (!isUser?.title) {
+            return { error: "El proyecto no existe" };
+        }
+
+        const project = await Project.findByIdAndDelete({ _id });
+
+        return { msg: "Proyecto eliminado con exito" };
+    } catch (e) {
+        return { msg: "Oops!, Ocurrio un error" };
+    }
+};
