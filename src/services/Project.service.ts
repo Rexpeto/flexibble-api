@@ -77,9 +77,9 @@ export const updateProjectId = async (
             return { msg: "Debe indicar un proyecto" };
         }
 
-        const project: any = Project.findOne({ _id, createBy: idUser });
+        const project: any = await Project.findOne({ _id, createBy: idUser });
 
-        if (!project) {
+        if (!project?.title) {
             return { msg: "No se encontró el proyecto" };
         }
 
@@ -112,11 +112,11 @@ export const updateProjectId = async (
             liveSiteUrl: newliveSiteUrl
         };
 
-        await Project.updateOne({ _id, createBy: idUser }, newProject);
+        await Project.findOneAndUpdate({ _id, createBy: idUser }, newProject);
 
         return project;
     } catch (e) {
-        return { msg: "No se encontró el proyecto" };
+        return { msg: "Oops!! Ocurrio un error" };
     }
 };
 
