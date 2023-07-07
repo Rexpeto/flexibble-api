@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import handleHttp from "../utils/error.handle";
 import {
     createProject,
+    deleteProjectId,
     getAllProjects,
     getProjectId,
     updateProjectId
@@ -120,4 +121,25 @@ export const updateProject = async (req: ReqExt, res: Response) => {
  * Delete project
  * @returns
  * */
-export const deleteProject = (req: Request, res: Response) => {};
+export const deleteProject = async (
+    { params, user }: ReqExt,
+    res: Response
+) => {
+    const { id } = params;
+    const idUser = user?.id;
+    try {
+        if (!id) {
+            res.status(403).json({ msg: "Debe colocar un proyecto" });
+        }
+
+        const response = await deleteProjectId(id, idUser);
+
+        if (response.error) {
+            return res.status(404).json(response);
+        }
+
+        res.status(200).json(response);
+    } catch (e) {
+        handleHttp(res, "Oops!! Ocurrio un error", e);
+    }
+};
