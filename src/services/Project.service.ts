@@ -69,7 +69,8 @@ export const getProjectId = async (id: string) => {
 export const updateProjectId = async (
     _id: string,
     idUser: string,
-    data: ProjectInterface
+    data: ProjectInterface,
+    image: string
 ) => {
     try {
         if (!_id) {
@@ -78,19 +79,29 @@ export const updateProjectId = async (
 
         const project: any = Project.findOne({ _id, createBy: idUser });
 
-        if (!project?.title) {
+        if (!project) {
             return { msg: "No se encontró el proyecto" };
         }
 
-        const { title, description, image, githubUrl, liveSiteUrl, category } =
-            data;
+        const { title, description, githubUrl, liveSiteUrl, category } = data;
 
-        const newTitle = title ? title : project?.title;
-        const newDescription = description ? description : project?.description;
-        const newImage = image === "undefined" || "" ? project?.image : image;
-        const newCategory = category ? category : project?.category;
-        const newGithub = githubUrl ? githubUrl : project?.githubUrl;
-        const newliveSiteUrl = liveSiteUrl ? liveSiteUrl : project?.liveSiteUrl;
+        const newTitle = title ? title.toLowerCase() : project?.title;
+        const newDescription = description
+            ? description.toLowerCase()
+            : project?.description;
+        const newImage =
+            image === "undefined" || ""
+                ? project?.image
+                : `${process.env.IP_PUBLIC_SERVER}:${process.env.PORT}${process.env.ROUTE_PROJECT}${image}`;
+        const newCategory = category
+            ? category.toLowerCase()
+            : project?.category;
+        const newGithub = githubUrl
+            ? githubUrl.toLowerCase()
+            : project?.githubUrl;
+        const newliveSiteUrl = liveSiteUrl
+            ? liveSiteUrl.toLowerCase()
+            : project?.liveSiteUrl;
 
         const newProject = {
             title: newTitle,
@@ -101,12 +112,9 @@ export const updateProjectId = async (
             liveSiteUrl: newliveSiteUrl
         };
 
-        const update = await Project.updateOne(
-            { _id, createBy: idUser },
-            newProject
-        );
+        await Project.updateOne({ _id, createBy: idUser }, newProject);
 
-        return update;
+        return project;
     } catch (e) {
         return { msg: "No se encontró el proyecto" };
     }

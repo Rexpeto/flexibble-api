@@ -92,13 +92,11 @@ export const setProject = async (req: ReqExt, res: Response) => {
  * Update project
  * @returns
  * */
-export const updateProject = async (
-    { body, params, user }: ReqExt,
-    res: Response
-) => {
+export const updateProject = async (req: ReqExt, res: Response) => {
     try {
-        const { id } = params;
-        const idUser = user?.id;
+        const { id } = req.params;
+        const idUser = req.user?.id;
+        const image: any = req.file?.filename;
 
         if (!id) {
             return res
@@ -106,7 +104,7 @@ export const updateProject = async (
                 .json({ msg: "Debe colocar el proyecto a editar" });
         }
 
-        const project: any = await updateProjectId(id, idUser, body);
+        const project: any = await updateProjectId(id, idUser, req.body, image);
 
         if (project?.msg) {
             return res.status(404).json(project);
