@@ -1,5 +1,6 @@
 import ProjectInterface from "../interfaces/Project.interface";
 import Project from "../models/Project.model";
+import User from "../models/User.model";
 
 export const getAllProjects = async () => {
     const projects: any = await Project.find();
@@ -44,6 +45,10 @@ export const createProject = async ({
         };
 
         const newProject = await Project.create(data);
+        await User.findByIdAndUpdate(
+            { _id: createBy },
+            { projects: newProject._id }
+        );
 
         return newProject;
     } catch (e) {
