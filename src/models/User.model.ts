@@ -1,44 +1,50 @@
 import mongoose, { Schema, model } from "mongoose";
 import UserInterface from "../interfaces/User.interface";
 
-const UserSchema = new Schema <UserInterface>({
+const UserSchema = new Schema<UserInterface>(
+  {
     name: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     email: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     password: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     avatarUrl: {
-        type: String,
-        default: `${process.env.IP_PUBLIC_SERVER}${process.env.ROUTE_PROFILE}profile.png`
+      type: String,
+      default: `${process.env.IP_PUBLIC_SERVER}:${process.env.PORT}${process.env.ROUTE_PROFILE}profile.png`,
     },
     description: {
-        type: String
+      type: String,
     },
     githubUrl: {
-        type: String
+      type: String,
     },
     linkedinUrl: {
-        type: String
+      type: String,
+    },
+    rol: {
+      type: String,
+      default: "admin",
     },
     projects: [
-        {
-             type: mongoose.Schema.Types.ObjectId,
-             ref: 'Project'
-        }
-    ]
-},  {
-        timestamps: true,
-    }
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Project",
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
 );
 
-const User = model('User', UserSchema);
+const User = model("User", UserSchema);
 
 export default User;

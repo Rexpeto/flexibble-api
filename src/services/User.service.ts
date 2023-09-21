@@ -5,90 +5,90 @@ import { encrypt, verified } from "../utils/bcrypt.handle";
 import { signToken } from "../utils/jwt.handle";
 
 export const registerNewUser = async ({
-    name,
-    email,
-    password
+  name,
+  email,
+  password,
 }: AuthRegister) => {
-    const checkIs: UserInterface | null = await User.findOne({ email });
+  const checkIs: UserInterface | null = await User.findOne({ email });
 
-    if (checkIs) {
-        return { msg: "El usuario ya existe" };
-    }
+  if (checkIs) {
+    return { msg: "El usuario ya existe" };
+  }
 
-    const passwordHash = await encrypt(password);
+  const passwordHash = await encrypt(password);
 
-    const newUser = await User.create({
-        name: name.toLowerCase(),
-        email: email.toLowerCase(),
-        password: passwordHash
-    });
+  const newUser = await User.create({
+    name: name.toLowerCase(),
+    email: email.toLowerCase(),
+    password: passwordHash,
+  });
 
-    return newUser;
+  return newUser;
 };
 
 export const loginUser = async ({ email, password }: AuthLogin) => {
-    try {
-        const checkIs: UserInterface | null = await User.findOne({ email });
+  try {
+    const checkIs: UserInterface | null = await User.findOne({ email });
 
-        if (!checkIs) {
-            return { msg: "El usuario o la contraseña es incorrecta" };
-        }
-
-        const passwordHash = checkIs.password;
-        const isCorrect = await verified(password, passwordHash);
-
-        if (!isCorrect) {
-            return { msg: "El usuario o la contraseña es incorrecta" };
-        }
-
-        const { _id, name, email: emailUser, avatarUrl } = checkIs;
-        const jwt = signToken(_id, name, emailUser);
-
-        return {
-            _id,
-            name,
-            email: emailUser,
-            avatarUrl,
-            accessToken: jwt
-        };
-    } catch (e) {
-        console.log(e);
-        return { msg: "El usuario o la contraseña es incorrecta" };
+    if (!checkIs) {
+      return { msg: "El usuario o la contraseña es incorrecta" };
     }
+
+    const passwordHash = checkIs.password;
+    const isCorrect = await verified(password, passwordHash);
+
+    if (!isCorrect) {
+      return { msg: "El usuario o la contraseña es incorrecta" };
+    }
+
+    const { _id, name, email: emailUser, avatarUrl, rol } = checkIs;
+    const jwt = signToken(_id, name, emailUser);
+
+    return {
+      _id,
+      name,
+      email: emailUser,
+      avatarUrl,
+      rol,
+      accessToken: jwt,
+    };
+  } catch (e) {
+    console.log(e);
+    return { msg: "El usuario o la contraseña es incorrecta" };
+  }
 };
 
 export const updateUser = async (
-    _id: string,
-    { name, email, githubUrl, linkedinUrl }: UserInterface,
-    fileName: string
+  _id: string,
+  { name, email, githubUrl, linkedinUrl }: UserInterface,
+  fileName: string
 ) => {
-    try {
-        const user = await User.findOne({ _id });
+  try {
+    const user = await User.findOne({ _id });
 
-        const avatar = fileName === "undefined" ? user?.avatarUrl : fileName;
-        const nameUser = name === undefined ? user?.name : name.toLowerCase();
-        const emailUser =
-            email === undefined ? user?.email : email.toLowerCase();
+    const avatar = fileName === "undefined" ? user?.avatarUrl : fileName;
+    const nameUser = name === undefined ? user?.name : name.toLowerCase();
+    const emailUser = email === undefined ? user?.email : email.toLowerCase();
 
-        const update = await User.findOneAndUpdate(
-            { _id },
-            {
-                name: nameUser,
-                email: emailUser,
-                avatarUrl: avatar,
-                githubUrl: githubUrl ?? user?.githubUrl,
-                linkedinUrl: linkedinUrl ?? user?.linkedinUrl
-            },
-            {
-                new: true
-            }
-        );
+    const update = await User.findOneAndUpdate(
+      { _id },
+      {
+        name: nameUser,
+        email: emailUser,
+        avatarUrl: avatar,
+        githubUrl: githubUrl ?? user?.githubUrl,
+        linkedinUrl: linkedinUrl ?? user?.linkedinUrl,
+      },
+      {
+        new: true,
+      }
+    );
 
-        await update?.save();
+    await update?.save();
 
-        return update;
-    } catch (e) {
-        console.log(e);
-        return { msg: "Oops! Ocurrio un error" };
-    }
+    return update;
+  } catch (e) {
+    console.log(e);
+    return { msg: "Oops! Ocurrio un error" };
+  }
 };
