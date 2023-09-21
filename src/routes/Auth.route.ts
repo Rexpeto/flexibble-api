@@ -26,6 +26,17 @@ export const router = Router();
  *                  description: The user's password.
  *                  example: 123456
  *     responses:
+ *       401:
+ *         description: Invalid credentials.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                     type: string
+ *                     description: The error message.
+ *                     example: El usuario o la contraseña es incorrecta
  *       200:
  *         description: User logged.
  *         content:
@@ -57,7 +68,8 @@ export const router = Router();
  *                      type: string
  *                      description: The user's token.
  *                      example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjY3MjQwMzYyLCJleHAiOjE2NjcyNDA5NjJ9.
- */
+ *
+ *           */
 router.post("/login", loginCtrl);
 
 router.post("/register", registerCtrl);
