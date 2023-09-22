@@ -1,8 +1,8 @@
-import UserInterface from "../interfaces/User.interface";
-import { AuthLogin, AuthRegister } from "../interfaces/authUser.interface";
-import User from "../models/User.model";
-import { encrypt, verified } from "../utils/bcrypt.handle";
-import { signToken } from "../utils/jwt.handle";
+import UserInterface from "@/interfaces/User.interface";
+import { AuthLogin, AuthRegister } from "@/interfaces/authUser.interface";
+import User from "@/models/User.model";
+import { encrypt, verified } from "@/utils/bcrypt.handle";
+import { signToken } from "@/utils/jwt.handle";
 
 export const registerNewUser = async ({
   name,

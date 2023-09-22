@@ -2,9 +2,9 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import swaggerUI from "swagger-ui-express";
-import { router } from "./routes";
-import dbConnect from "./config/mongodb";
-import swaggerSetup from "./doc/swagger";
+import { router } from "@/routes";
+import dbConnect from "@/config/mongodb";
+import swaggerSetup from "@/doc/swagger";
 
 const PORT = process.env.PORT ?? 4000;
 const app = express();

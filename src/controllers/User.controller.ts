@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import handleHttp from "../utils/error.handle";
+import handleHttp from "@/utils/error.handle";
 import {
   loginUser,
   registerNewUser,
   updateUser,
-} from "../services/User.service";
-import ReqExt from "../interfaces/ReqExt.interface";
+} from "@/services/User.service";
+import ReqExt from "@/interfaces/ReqExt.interface";
 
 /*
  * Login user

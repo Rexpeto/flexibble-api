@@ -1,36 +1,38 @@
 import mongoose, { Schema, model } from "mongoose";
-import ProjectInterface from "../interfaces/Project.interface";
+import ProjectInterface from "@/interfaces/Project.interface";
 
-const ProjectSchema = new Schema<ProjectInterface>({
+const ProjectSchema = new Schema<ProjectInterface>(
+  {
     title: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     description: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     image: {
-        type: String,
-        default: 'post.png'
+      type: String,
+      default: "post.png",
     },
     liveSiteUrl: {
-        type: String,
+      type: String,
     },
     githubUrl: {
-        type: String,
+      type: String,
     },
     category: {
-        type: String,
+      type: String,
     },
     createBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }
-}, {
-        timestamps: true
-    }
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  },
+  {
+    timestamps: true,
+  }
 );
 
-const Project = model('Project', ProjectSchema);
+const Project = model("Project", ProjectSchema);
 export default Project;
