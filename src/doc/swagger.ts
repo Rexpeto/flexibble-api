@@ -20,6 +20,20 @@ const swaggerDefinition: OAS3Definition = {
       description: "Production server",
     },
   ],
+  tags: [
+    {
+      name: "Auth",
+      description: "User authentication to the system",
+    },
+    {
+      name: "User",
+      description: "User actions in your account",
+    },
+    {
+      name: "Project",
+      description: "Project actions in your account",
+    },
+  ],
   basePath: "/",
   components: {
     securitySchemes: {
