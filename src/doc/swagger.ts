@@ -99,7 +99,7 @@ const swaggerDefinition: OAS3Definition = {
             type: "array",
             items: {
               type: "string",
-              example: "5e1b7a0d3f9b2e1b7a0d3f9b",
+              example: "5e1b7a0d3f9b2e1b7a0dasdjhf",
               description: "The project id",
             },
           },
@@ -109,6 +109,11 @@ const swaggerDefinition: OAS3Definition = {
         type: "object",
         required: ["title", "description", "image", "category"],
         properties: {
+          _id: {
+            type: "string",
+            example: "5e1b7a0d3f9b2e1b7a0dasdjhf",
+            description: "The project ID",
+          },
           title: {
             type: "string",
             exmaple: "landing page crypto",
