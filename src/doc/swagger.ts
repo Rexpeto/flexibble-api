@@ -50,35 +50,57 @@ const swaggerDefinition: OAS3Definition = {
         properties: {
           _id: {
             type: "string",
+            example: "5e1b7a0d3f9b2e1b7a0d3f9b",
+            description: "The user ID",
           },
           name: {
             type: "string",
+            exmaple: "Leanne Graham",
+            description: "The user's name",
           },
           email: {
             type: "string",
+            exmaple: "leanne@example.com",
+            description: "The user's email",
           },
           password: {
             type: "string",
+            exmaple: "123456",
+            description: "The user's password",
           },
           avatarUrl: {
             type: "string",
+            exmaple:
+              "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+            description: "The image url of the user",
           },
           description: {
             type: "string",
+            exmaple:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            description: "The user's description",
           },
           githubUrl: {
             type: "string",
+            exmaple: "https://github.com/leanndavidgraham",
+            description: "The user's github url",
           },
           linkedinUrl: {
             type: "string",
+            exmaple: "https://www.linkedin.com/in/leanndavidgraham",
+            description: "The user's linkedin url",
           },
           rol: {
             type: "string",
+            exmaple: "admin",
+            description: "The user's role",
           },
           projects: {
             type: "array",
             items: {
               type: "string",
+              example: "5e1b7a0d3f9b2e1b7a0d3f9b",
+              description: "The project id",
             },
           },
         },
