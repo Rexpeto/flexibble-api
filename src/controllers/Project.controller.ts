@@ -42,7 +42,7 @@ export const getProjects = async (req: Request, res: Response) => {
   try {
     const response = await getAllProjects();
 
-    res.status(200).json({ response });
+    res.status(200).json(response);
   } catch (e) {
     handleHttp(res, "Oops!! Ocurrio un error", e);
   }
