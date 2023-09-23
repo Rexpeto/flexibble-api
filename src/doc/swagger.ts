@@ -83,6 +83,47 @@ const swaggerDefinition: OAS3Definition = {
           },
         },
       },
+      Project: {
+        type: "object",
+        required: ["title", "description", "image", "category"],
+        properties: {
+          title: {
+            type: "string",
+            exmaple: "landing page crypto",
+            description: "The project's title",
+          },
+          description: {
+            type: "string",
+            exmaple: "crypto money landing page",
+            description: "The project's description",
+          },
+          image: {
+            type: "string",
+            exmaple: "post.png",
+            description: "The project's image",
+          },
+          liveSiteUrl: {
+            type: "string",
+            exmaple: "https://example.com",
+            description: "The project's live site",
+          },
+          githubUrl: {
+            type: "string",
+            exmaple: "https://github.com",
+            description: "The project's github url",
+          },
+          category: {
+            type: "string",
+            exmaple: "landing page",
+            description: "The project's category",
+          },
+          createBy: {
+            type: "string",
+            exmaple: "5e1b7a0d3f9b2e1b7a0d3f9b",
+            description: "The user ID",
+          },
+        },
+      },
     },
   },
 };
