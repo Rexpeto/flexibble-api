@@ -32,6 +32,53 @@ export const router = Router();
  *           */
 router.get("/", getProjects);
 
+/**
+ * @swagger
+ * /project/search/{id}:
+ *   post:
+ *     summary: Get project by id.
+ *     description: Shows project by id.
+ *     tags: [Project]
+ *     security:
+ *     - bearerAuth: []
+ *     parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        schema:
+ *          type: string
+ *          description: The id of the project
+ *     responses:
+ *       200:
+ *         description: Show project
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/Project"
+ *       400:
+ *         description: Not authentication
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                msg:
+ *                    type: string
+ *                    description: The error message
+ *                    example: Inicie sesión
+ *       404:
+ *         description: Not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                msg:
+ *                    type: string
+ *                    description: The error message
+ *                    example: El proyecto no existe
+ *              */
+
 router.post("/search/:id", sessionActive, getProject);
 
 router.post(
