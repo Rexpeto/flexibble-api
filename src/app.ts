@@ -41,3 +41,6 @@ app.use(
 );
 
 app.listen(PORT, () => console.log(`⚡Running through the port: ${PORT}`));
+console.log(
+  `📚Documentation: ${process.env.IP_PUBLIC_SERVER}:${PORT}/documentation`
+);
