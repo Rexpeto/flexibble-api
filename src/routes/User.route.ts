@@ -10,8 +10,10 @@ export const router = Router();
  * /user/update:
  *   put:
  *     summary: Update user.
- *     description: Updates the user with the information provided. You need to use user authentication.
+ *     description: Updates the user with the information provided.
  *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *         required: true
  *         content:
