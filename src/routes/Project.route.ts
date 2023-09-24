@@ -161,7 +161,87 @@ router.post(
   setProject
 );
 
-router.post(
+/**
+ * @swagger
+ * /project/update/{id}:
+ *   put:
+ *     summary: Update project.
+ *     description: Update user project
+ *     tags: [Project]
+ *     security:
+ *     - bearerAuth: []
+ *     parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        schema:
+ *          type: string
+ *          description: The id of the project
+ *     requestBody:
+ *      content:
+ *        multipart/form-data:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              title:
+ *                type: string
+ *                description: The project's title
+ *                example: landing page crypto
+ *                required: true
+ *              description:
+ *                type: string
+ *                description: The project's description
+ *                example: landing page crypto
+ *                required: true
+ *              category:
+ *                type: string
+ *                description: The project's category
+ *                example: web design
+ *                required: true
+ *              liveSiteUrl:
+ *                type: string
+ *                description: The project's live site url
+ *                example: https://example.com
+ *              githubUrl:
+ *                type: string
+ *                description: The project's github url
+ *                example: https://github.com/
+ *              image:
+ *                type: string
+ *                description: The project's image
+ *                example: file form data
+ *                format: binary
+ *     responses:
+ *       200:
+ *         description: Sample updated project
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/Project"
+ *       400:
+ *         description: Not authentication
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                msg:
+ *                    type: string
+ *                    description: The error message
+ *                    example: Inicie sesión
+ *       404:
+ *         description: Not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                msg:
+ *                    type: string
+ *                    description: The error message
+ *                    example: Oops!! Ocurrio un error
+ *              */
+router.put(
   "/update/:id",
   sessionActive,
   uploadImgProject.single("image"),
