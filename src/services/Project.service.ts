@@ -126,7 +126,7 @@ export const deleteProjectId = async (_id: string, idUser: string) => {
     const isUser = await Project.findOne({ _id, createBy: idUser });
 
     if (!isUser?.title) {
-      return { error: "El proyecto no existe" };
+      return { error: "El proyecto no existe o no tiene permisos" };
     }
 
     const project = await Project.findByIdAndDelete({ _id });
