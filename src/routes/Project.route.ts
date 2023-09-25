@@ -248,4 +248,56 @@ router.put(
   updateProject
 );
 
-router.post("/delete/:id", sessionActive, deleteProject);
+/**
+ * @swagger
+ * /project/delete/{id}:
+ *   delete:
+ *     summary: Delete project.
+ *     description: Delete user project
+ *     tags: [Project]
+ *     security:
+ *     - bearerAuth: []
+ *     parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        schema:
+ *          type: string
+ *          description: The id of the project
+ *     responses:
+ *       200:
+ *         description: user project deletion
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                msg:
+ *                    type: string
+ *                    description: Success
+ *                    example: Proyecto eliminado con exito
+ *       400:
+ *         description: Not authentication
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                msg:
+ *                    type: string
+ *                    description: The error message
+ *                    example: Inicie sesión
+ *       404:
+ *         description: Not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                error:
+ *                    type: string
+ *                    description: The error message
+ *                    example: El proyecto no existe o no tiene permisos
+ *              */
+
+router.delete("/delete/:id", sessionActive, deleteProject);
